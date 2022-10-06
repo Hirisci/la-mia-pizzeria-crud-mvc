@@ -15,14 +15,14 @@
                             <h5 class="card-title">@pizza.Name</h5>
                             <p class="card-text flex-grow-1">@pizza.Descrition</p>
                             <div class="d-flex justify-content-between">
-                                <div class="card-button d-flex gap-2">
-                                    <a asp-area="" asp-controller="Home" asp-action="Details" asp-route-id="@pizza.Id"><i class="fa-solid fa-circle-info text-primary"></i></a>
-                                    <a asp-area="" asp-controller="Home" asp-action="Edit" asp-route-id="@pizza.Id"><i class="fa-solid fa-pen-to-square text-warning"></i></a>
+                                <div class="card-button d-flex justify-content-center gap-2">
+                                    <a class="btn" asp-area="" asp-controller="Home" asp-action="Details" asp-route-id="@pizza.Id"><i class="fa-solid fa-circle-info text-primary"></i></a>
+                                    <a class="btn" asp-area="" asp-controller="Home" asp-action="Edit" asp-route-id="@pizza.Id"><i class="fa-solid fa-pen-to-square text-warning"></i></a>
                                     <form method="post" asp-action="Delete" asp-route-id="@pizza.Id">
-                                    <button class="btn-reset" type="submit"><i class="fa-solid fa-trash-can my-px text-danger"></i></button>
+                                    <button class="btn" type="submit"><i class="fa-solid fa-trash-can my-px text-danger"></i></button>
                                     </form>
                                 </div>
-                                <p class="card-text">Prezzo: @pizza.Amount.ToString("C")</p>
+                                <p class="card-text py-2">Prezzo: @pizza.Amount.ToString("C")</p>
                             </div>
 
                         </div>

@@ -9,12 +9,20 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body d-flex flex-column h-100 ">
-                    <div class="ms-auto mb-3"><a class="text-danger" asp-controller="Home" asp-action="Menu"><i class="fa-solid fa-circle-xmark"></i></a></div>
+                    
+                        <div class="ms-auto d-flex">
+                            <form method="post" asp-action="Delete" asp-route-id="@Model.Id">
+                                <button class="btn" type="submit"><i class="fa-solid fa-trash-can my-px text-danger"></i></button>
+                            </form>
+                            <a class="btn" asp-area="" asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa-solid fa-pen-to-square text-warning"></i></a>
+                            <a class="text-danger btn" asp-controller="Home" asp-action="Menu"><i class="fa-solid fa-circle-xmark"></i></a>
+                        </div>
+                    
                     <div class="flex-grow-1">
                         <h5 class="card-title">@Model.Name</h5>
                         <p class="card-text">@Model.Descrition</p>
                     </div>
-                    <div class="ms-auto pillow"><p class="card-text">Prezzo: @Model.Amount.ToString("C")</p></div>
+                    <div class="ms-auto"><p class="card-text">Prezzo: @Model.Amount.ToString("C")</p></div>
 
 
 
