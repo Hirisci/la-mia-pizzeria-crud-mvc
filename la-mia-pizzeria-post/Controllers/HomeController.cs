@@ -49,12 +49,69 @@ namespace la_mia_pizzeria_model.Controllers
             _db.SaveChanges();
             return RedirectToAction(nameof(Menu));
         }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            Pizza? pizza = _db.Pizze.First(x => x.Id == id);
+
+            if(pizza is null)
+            {
+                return NotFound("Pizza non disponibile");
+            }
+            
+            return View(pizza);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id , Pizza newPizza)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(newPizza);
+            }
+
+            Pizza? pizza = _db.Pizze.First(x => x.Id == id);
+
+            if (pizza is null)
+            {
+                return NotFound("Pizza non disponibile");
+            }
+
+            pizza.Name = newPizza.Name;
+            pizza.Amount = newPizza.Amount;
+            pizza.Descrition = newPizza.Descrition;
+            pizza.Img = newPizza.Img;
+
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Menu));
+        }
 
         [HttpGet]
         public IActionResult Details(int id)
         {
             Pizza? pizza = _db.Pizze.First(x => x.Id == id);
+            if (pizza is null)
+            {
+                return NotFound("Pizza non disponibile");
+            }
             return View(pizza);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            Pizza? pizza = _db.Pizze.First(x => x.Id == id);
+            if (pizza is null)
+            {
+                return NotFound("Pizza non disponibile");
+            }
+
+            _db.Pizze.Remove(pizza);
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Menu));
         }
 
         public IActionResult Privacy()
