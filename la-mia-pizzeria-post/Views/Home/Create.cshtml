@@ -1,0 +1,32 @@
+﻿@model Pizza
+
+<div>
+    <form class="mt-4" method="Post" asp-action="Create">
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label">Nome</label>
+            <input asp-for="Name" class="form-control">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Amount" class="form-label">Prezzo</label>
+            <input asp-for="Amount" class="form-control">
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Img" class="form-label">Immagine(url)</label>
+            <input asp-for="Img" class="form-control">
+            <span asp-validation-for="Img" class="text-danger"></span>
+        </div>
+        <div class="mb-4">
+            <label asp-for="Descrition" class="form-label">Descrizione</label>
+            <textarea asp-for="Descrition" rows="5" class="form-control"></textarea>
+            <span asp-validation-for="Descrition" class="text-danger"></span>
+        </div>
+        <div class="mb-3 d-flex flex-row-reverse gap-2">
+            <button type="submit" class="btn btn-primary">Invia</button>
+            <a type="submit" asp-controller="Home" asp-action="Menu" class="btn btn-danger">Annulla</a>
+        </div>
+    
+    </form>
+</div>
+
