@@ -11,5 +11,6 @@ namespace la_mia_pizzeria_post.Data
         }
 
         public DbSet<Pizza> Pizze { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

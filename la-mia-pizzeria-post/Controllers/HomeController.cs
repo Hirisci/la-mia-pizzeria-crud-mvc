@@ -32,23 +32,28 @@ namespace la_mia_pizzeria_model.Controllers
         }
         
         public IActionResult Create()
-        {            
-            return View();
+        {
+            PizzaCategory pizzaCategory = new PizzaCategory();
+            pizzaCategory.Pizza = new Pizza();
+            pizzaCategory.Categories = _db.Categories.ToList();
+            return View(pizzaCategory);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pizza pizza)
+        public IActionResult Create(PizzaCategory pizzaCategory)
         {
             if (!ModelState.IsValid)
             {
-                return View(pizza);
+                pizzaCategory.Categories = _db.Categories.ToList();
+                return View(pizzaCategory);
             }
             
-            _db.Pizze.Add(pizza);
+            _db.Pizze.Add(pizzaCategory.Pizza);
             _db.SaveChanges();
             return RedirectToAction(nameof(Menu));
         }
+
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -58,17 +63,21 @@ namespace la_mia_pizzeria_model.Controllers
             {
                 return NotFound("Pizza non disponibile");
             }
-            
-            return View(pizza);
+
+            PizzaCategory pizzaCategory = new PizzaCategory();
+            pizzaCategory.Pizza = pizza;
+            pizzaCategory.Categories = _db.Categories.ToList();
+            return View(pizzaCategory);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id , Pizza newPizza)
+        public IActionResult Edit(int id , PizzaCategory pizzaCategory)
         {
             if (!ModelState.IsValid)
             {
-                return View(newPizza);
+                pizzaCategory.Categories = _db.Categories.ToList();
+                return View(pizzaCategory);
             }
 
             Pizza? pizza = _db.Pizze.First(x => x.Id == id);
@@ -78,10 +87,11 @@ namespace la_mia_pizzeria_model.Controllers
                 return NotFound("Pizza non disponibile");
             }
 
-            pizza.Name = newPizza.Name;
-            pizza.Amount = newPizza.Amount;
-            pizza.Descrition = newPizza.Descrition;
-            pizza.Img = newPizza.Img;
+            pizza.Name = pizzaCategory.Pizza.Name;
+            pizza.Amount = pizzaCategory.Pizza.Amount;
+            pizza.Descrition = pizzaCategory.Pizza.Descrition;
+            pizza.Img = pizzaCategory.Pizza.Img;
+            pizza.CategoryId = pizzaCategory.Pizza.CategoryId;
 
             _db.SaveChanges();
 
